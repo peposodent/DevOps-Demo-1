@@ -83,7 +83,7 @@ stages {
         post {
 always {
 
-      junit '/home/cloud_user/workspace/ArchivePipeline/examples/feed-combiner-java8-webapp/target/surefire-reports/*.xml'
+      junit 'examples/feed-combiner-java8-webapp/target/surefire-reports/*.xml'
   } 
 }
 }
