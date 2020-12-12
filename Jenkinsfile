@@ -29,7 +29,7 @@ stages {
             
       
                sh '''
-                cd "/home/cloud_user/workspace/AgentExample/examples/feed-combiner-java8-webapp"
+                cd "/home/cloud_user/workspace/ArchivePipeline/examples/feed-combiner-java8-webapp"
                 mvn clean install
                 '''   }
     }
@@ -83,7 +83,7 @@ stages {
         post {
 always {
 
-      junit '/home/cloud_user/workspace/AgentExample/examples/feed-combiner-java8-webapp/target/surefire-reports/*.xml'
+      junit '/home/cloud_user/workspace/ArchivePipeline/examples/feed-combiner-java8-webapp/target/surefire-reports/*.xml'
   } 
 }
 }
