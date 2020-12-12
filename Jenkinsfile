@@ -18,7 +18,8 @@ stages {
 
     stage ('Checkout') {
         steps {
-            checkout([$class: 'GitSCM', branches: [[name: '*/AgentExample']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/devops81/DevOps-Demo.git']]])
+            checkout([$class: 'GitSCM', branches: [[name: '*/AgentExample']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], 
+                      userRemoteConfigs: [[url: 'https://github.com/devops81/DevOps-Demo.git']]])
             
         }
     }
@@ -28,7 +29,7 @@ stages {
             
       
                sh '''
-                cd "/home/cloud_user/workspace/AgentExamplePipeline/examples/feed-combiner-java8-webapp"
+                cd "/home/cloud_user/workspace/AgentExample/examples/feed-combiner-java8-webapp"
                 mvn clean install
                 '''   }
     }
@@ -82,7 +83,7 @@ stages {
         post {
 always {
 
-      junit '/home/cloud_user/workspace/AgentExamplePipeline/examples/feed-combiner-java8-webapp/target/surefire-reports/*.xml'
+      junit '/home/cloud_user/workspace/AgentExample/examples/feed-combiner-java8-webapp/target/surefire-reports/*.xml'
   } 
 }
 }
