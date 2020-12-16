@@ -6,7 +6,7 @@ stage ('SCM Checkout') {
 
 }
 
-stage ('Compile-Package')
+stage ('Compile-Packages')
 
 {
 def mvnHome = tool name: 'MVN3', type: 'maven'
