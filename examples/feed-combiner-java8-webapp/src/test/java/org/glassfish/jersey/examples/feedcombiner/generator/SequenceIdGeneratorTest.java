@@ -48,7 +48,7 @@ public class SequenceIdGeneratorTest {
     public void testSequence() {
         SequenceIdGenerator generator = new SequenceIdGenerator();
         List<String> ids = Arrays.asList(generator.getId(), generator.getId(), generator.getId());
-        assertThat(ids, is(Arrays.asList("1", "2", "5")));
+        assertThat(ids, is(Arrays.asList("1", "2", "3")));
     }
 
 }
