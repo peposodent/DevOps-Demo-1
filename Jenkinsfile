@@ -27,7 +27,7 @@
                         steps {
                             
                           sh '''
-                                cd "/var/lib/jenkins/workspace/Declarative Pipeline example/examples/feed-combiner-java8-webapp"
+                                cd "/var/jenkins_home/workspace/Declarative Pipeline example/examples/feed-combiner-java8-webapp"
                                 mvn test install
                             '''   }
                     }
