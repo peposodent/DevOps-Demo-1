@@ -74,7 +74,7 @@
                             label "master"
                         }
                         steps {
-                            emailext body: '$DEFAULT_CONTENT', subject: '$DEFAULT_SUBJECT', to: 'devops81@gmail.com'
+                            echo "Test notification" /* emailext body: '$DEFAULT_CONTENT', subject: '$DEFAULT_SUBJECT', to: 'devops81@gmail.com'*/
             
                             
                         }
