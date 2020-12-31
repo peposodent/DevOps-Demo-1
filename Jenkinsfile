@@ -1,4 +1,9 @@
             pipeline {
+                        environment {
+                                    registry = "devops81/devops:2.1.2"
+                                    registryCredential = 'dockerhub'
+                                    dockerImage = ''
+                                    }
                 agent {
                     label "master"
                 }
@@ -50,6 +55,13 @@
                                  )
                         } 
                     }
+                            stage('Building image') {
+                                    steps{
+                                                script {
+                                                            dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                                                       }
+                                                    }
+                                         }
                     stage ('Deploy the application') {
                         steps {
                            
