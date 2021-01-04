@@ -65,6 +65,15 @@
                                                        }
                                                     }
                                          }
+                             stage("Docker login") {
+               steps {
+                    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub',
+                               usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+                         sh "docker login --username $USERNAME --password $PASSWORD"
+                    }
+               }
+          }
+                            
                              stage("Docker push") {
                                     steps {
                                     sh "docker push devops81/devops:$BUILD_NUMBER"
