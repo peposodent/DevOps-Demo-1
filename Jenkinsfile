@@ -62,6 +62,12 @@
                                                        }
                                                     }
                                          }
+                             stage("Docker push") {
+               steps {
+                    sh "docker push devops81/devops:${BUILD_NUMBER}"
+               }
+          }
+
                     stage ('Deploy the application') {
                         steps {
                            
