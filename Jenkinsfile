@@ -67,7 +67,7 @@
                                          }
                              stage("Docker push") {
                                     steps {
-                                    sh "docker push registry + :$BUILD_NUMBER"
+                                    sh "docker push devops81/devops:$BUILD_NUMBER"
                                           }
           }
 
