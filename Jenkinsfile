@@ -1,6 +1,6 @@
             pipeline {
                         environment {
-                                    registry = "devops81/devops"
+                                    registry = "wbbdocker1/devops"
                                     registryCredential = 'dockerhub'
                                     dockerImage = ''
                                     }
@@ -26,7 +26,7 @@
             
                     stage ('Checkout') {
                         steps {
-                            checkout([$class: 'GitSCM', branches: [[name: '*/DPLExample']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/devops81/DevOps-Demo.git']]])
+                            checkout([$class: 'GitSCM', branches: [[name: '*/DPLExample']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/bbaileyilw/DevOps-Demo.git']]])
                             
                         }
                     }
@@ -36,7 +36,7 @@
                             
                       
                                sh '''
-                                cd "/var/jenkins_home/workspace/Declarative Pipeline example/examples/feed-combiner-java8-webapp"
+                                cd "/var/lib/jenkins/workspace/Declarative Pipeline example/examples/feed-combiner-java8-webapp"
                                 mvn clean install
                                 '''   }
                     }
