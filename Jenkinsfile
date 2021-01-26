@@ -53,7 +53,8 @@
                                   'Sending out the JUNIT report' :
                                   {                  
                  /*                         echo "Test email" emailext body: 'Junits reporting getting archived', subject: 'junit update', to: 'devops81@gmail.com'*/ 
-                                 }
+                                 echo "Sending JUnit Report"
+                                  }
                                           
                                        
                                  )
