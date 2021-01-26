@@ -44,10 +44,11 @@
                       stage ('Generate JUNIT REPORT') {
                          steps {
                               parallel ( 
-                                  'Archeiving the reports': 
+                                  'Archiving the reports': 
                         {
                             junit 'examples/feed-combiner-java8-webapp/target/surefire-reports/*.xml'
-                            
+                                    sh "exit 0"
+                     
                         },
                                   'Sending out the JUNIT report' :
                                   {                  
