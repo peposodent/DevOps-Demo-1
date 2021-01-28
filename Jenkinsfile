@@ -47,7 +47,7 @@
                                   'Archiving the reports': 
                         {
                                    junit 'examples/feed-combiner-java8-webapp/target/surefire-reports/*.xml'
-                                    sh "exit 0" 
+                                
                      echo "archiving reports"
                         },
                                   'Sending out the JUNIT report' :
