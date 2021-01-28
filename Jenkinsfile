@@ -63,7 +63,7 @@
                             stage ('Archive WAR file')
                             {
                                         steps {
-                                                    archiveArtifacts artifacts: 'examples/feed-combiner-java8-webapp/target/devops.war', followSymlinks: false
+                                                    archiveArtifacts artifacts: 'examples/feed-combiner-java8-webapp/target/devops.war'
                                         }
                             }
                             stage('Building image') {
