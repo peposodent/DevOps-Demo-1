@@ -76,9 +76,10 @@
                                          }
                              stage("Docker login") {
                steps {
-                    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub',
+                  /*  withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub',
                                usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-                         sh "docker login --username $USERNAME --password $PASSWORD"
+                         sh "docker login --username $USERNAME --password $PASSWORD" */
+                           echo "Docker login"
                     }
                }
           }
