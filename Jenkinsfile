@@ -108,14 +108,7 @@
                             
                         }
                     }
-                            
-                 /*  stage ('Send slack notification')
-                            {
-                                        steps 
-                                        {
-                                                   slackSend baseUrl: 'https://hooks.slack.com/services/', channel: '#krishnademo', color: 'good', message: '"#439FE0", message: "Build Started: ${env.JOB_NAME} ${env.BUILD_NUMBER}"', teamDomain: 'devops81', tokenCredentialId: 'SlackKrishnademo'
-                                        }
-                            }*/
+             
                     
                   
                 }
