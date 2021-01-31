@@ -1,6 +1,6 @@
             pipeline {
                         environment {
-                                    registry = "devops81/devops"
+                                    registry = "wbbdocker1/devops"
                                     registryCredential = 'dockerhub'
                                     dockerImage = ''
                                     }
@@ -36,7 +36,7 @@
                             
                       
                                sh '''
-                                cd "/var/lib/jenkins/workspace/Declarative Pipeline example/examples/feed-combiner-java8-webapp"
+                                cd "/var/lib/jenkins/workspace/NewPipeline/examples/feed-combiner-java8-webapp"
                                 mvn clean install
                                 '''   }
                     }
