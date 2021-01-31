@@ -1,6 +1,6 @@
             pipeline {
                         environment {
-                                    registry = "wbbdocker1/devops"
+                                    registry = "devops81/devops"
                                     registryCredential = 'dockerhub'
                                     dockerImage = ''
                                     }
@@ -26,7 +26,7 @@
             
                     stage ('Checkout') {
                         steps {
-                            checkout([$class: 'GitSCM', branches: [[name: '*/DPLExample']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/bbaileyilw/DevOps-Demo.git']]])
+                            checkout([$class: 'GitSCM', branches: [[name: '*/DPLExample']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/devops81/DevOps-Demo.git']]])
                             
                         }
                     }
@@ -36,7 +36,7 @@
                             
                       
                                sh '''
-                                cd "/var/lib/jenkins/workspace/NewPipeline/examples/feed-combiner-java8-webapp"
+                                cd "/var/jenkins_home/workspace/Declarative Pipeline example/examples/feed-combiner-java8-webapp"
                                 mvn clean install
                                 '''   }
                     }
@@ -44,29 +44,20 @@
                       stage ('Generate JUNIT REPORT') {
                          steps {
                               parallel ( 
-                                  'Archiving the reports': 
+                                  'Archeiving the reports': 
                         {
-                                   junit 'examples/feed-combiner-java8-webapp/target/surefire-reports/*.xml'
-                                
-                     echo "archiving reports"
+                            junit 'examples/feed-combiner-java8-webapp/target/surefire-reports/*.xml'
+                            
                         },
                                   'Sending out the JUNIT report' :
                                   {                  
-                                               echo "Test email" emailext body: 'Junits reporting getting archived', subject: 'junit update', to: 'devops81@gmail.com'*/ 
-                                 echo "Sending JUnit Report"
-                                  }
+                                     echo "Test email" /*emailext body: 'Junits reporting getting archived', subject: 'junit update', to: 'devops81@gmail.com'*/
+                                 }
                                           
                                        
                                  )
                         } 
                     }
-                            stage ('Archive WAR file')
-                            {
-                                        steps {
-                                                    
-                                                    echo "Test archive"
-                                        }
-                            }
                             stage('Building image') {
                                     steps{
                                                 script {
@@ -76,16 +67,16 @@
                                          }
                              stage("Docker login") {
                steps {
-                  /*  withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub',usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {sh "docker login --username $USERNAME --password $PASSWORD" */
-                           echo "Docker login"
+                    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub',
+                               usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+                         sh "docker login --username $USERNAME --password $PASSWORD"
                     }
                }
           }
                             
                              stage("Docker push") {
                                     steps {
-                                   
-                                                echo "DOcker push"
+                                    sh "docker push devops81/devops:$BUILD_NUMBER"
                                           }
           }
 
@@ -108,7 +99,14 @@
                             
                         }
                     }
-             
+                            
+                 /*  stage ('Send slack notification')
+                            {
+                                        steps 
+                                        {
+                                                   slackSend baseUrl: 'https://hooks.slack.com/services/', channel: '#krishnademo', color: 'good', message: '"#439FE0", message: "Build Started: ${env.JOB_NAME} ${env.BUILD_NUMBER}"', teamDomain: 'devops81', tokenCredentialId: 'SlackKrishnademo'
+                                        }
+                            }*/
                     
                   
                 }
