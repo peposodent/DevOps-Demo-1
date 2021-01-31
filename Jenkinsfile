@@ -84,7 +84,7 @@
                             
                              stage("Docker push") {
                                     steps {
-                                   /* sh "docker push wbbdocker1/devops:$BUILD_NUMBER"*/
+                                   
                                                 echo "DOcker push"
                                           }
           }
