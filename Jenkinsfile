@@ -1,6 +1,6 @@
             pipeline {
                         environment {
-                                    registry = "devops81/devops"
+                                    registry = "wbbdocker1/devops"
                                     registryCredential = 'dockerhub'
                                     dockerImage = ''
                                     }
@@ -36,7 +36,7 @@
                             
                       
                                sh '''
-                                cd "/var/jenkins_home/workspace/Declarative Pipeline example/examples/feed-combiner-java8-webapp"
+                                cd "/root/.jenkins/workspace/Declarative Pipeline example/examples/feed-combiner-java8-webapp"
                                 mvn clean install
                                 '''   }
                     }
@@ -51,7 +51,7 @@
                         },
                                   'Sending out the JUNIT report' :
                                   {                  
-                                     echo "Test email" /*emailext body: 'Junits reporting getting archived', subject: 'junit update', to: 'devops81@gmail.com'*/
+                                     echo "Test email" /*emailext body: 'Junits reporting getting archived', subject: 'junit update', to: 'wbbjenkins.training@gmail.com'*/
                                  }
                                           
                                        
@@ -76,7 +76,7 @@
                             
                              stage("Docker push") {
                                     steps {
-                                    sh "docker push devops81/devops:$BUILD_NUMBER"
+                                    sh "docker push wbbdocker1/devops:$BUILD_NUMBER"
                                           }
           }
 
@@ -87,19 +87,21 @@
                             
                         }
                     }
-                    stage ('Send out email Notification') {
-                        agent {
-                            label "master"
-                        }
-                        steps {
-                            echo "Test notification"  
-                                    emailext body: '$DEFAULT_CONTENT', subject: '$DEFAULT_SUBJECT', to: 'devops81@gmail.com'
-                                    
-            
-                            
-                        }
-                    }
-                            
+                    
+         
+ stage('Send email') {
+     steps {       
+    def mailRecipients = "wbbjenkins.training@gmail.com"
+    def jobName = currentBuild.fullDisplayName
+
+    emailext body: '''${SCRIPT, template="francois.email.groovy.template"}''',
+        mimeType: 'text/html',
+        subject: "[Jenkins] ${jobName}",
+        to: "${mailRecipients}",
+        replyTo: "${mailRecipients}",
+        recipientProviders: [[$class: 'CulpritsRecipientProvider']]
+}
+     }        
                  /*  stage ('Send slack notification')
                             {
                                         steps 
