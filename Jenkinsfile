@@ -37,7 +37,7 @@
                             
                       
                                sh '''
-                                cd "/root/.jenkins/workspace/Declarative Pipeline example/examples/feed-combiner-java8-webapp"
+                                cd "${env.WORKSPACE}/Declarative Pipeline example/examples/feed-combiner-java8-webapp"
                                 mvn clean install
                                 '''   }
                     }
