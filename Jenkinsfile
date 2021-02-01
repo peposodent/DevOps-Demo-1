@@ -93,11 +93,7 @@
     stage('Email')
         {
                     steps {
-            env.ForEmailPlugin = env.WORKSPACE      
-            emailext attachmentsPattern: 'TestResults\\*.trx',      
-            body: '''${SCRIPT, template="groovy_html.template"}''', 
-            subject: currentBuild.currentResult + " : " + env.JOB_NAME, 
-            to: 'devops81@gmail.com'
+            echo "email sending"
                     }
         }
            
