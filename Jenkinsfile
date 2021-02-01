@@ -113,7 +113,7 @@
                         def jobName = currentBuild.fullDisplayName
                         env.Name = Name
                         env.cest = cest
-                        emailext body: '''${SCRIPT, template="email-html.template"}''',
+                        emailext body: '''${SCRIPT, template="francois.email.groovy.template"}''',
                         mimeType: 'text/html',
                         subject: "[Jenkins] ${jobName}",
                         to: "${mailRecipients}",
