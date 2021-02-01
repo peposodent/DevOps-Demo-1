@@ -89,19 +89,16 @@
                     }
                     
          
- stage('Send email') {
-     steps {       
-    def mailRecipients = "wbbjenkins.training@gmail.com"
-    def jobName = currentBuild.fullDisplayName
 
-    emailext body: '''${SCRIPT, template="francois.email.groovy.template"}''',
-        mimeType: 'text/html',
-        subject: "[Jenkins] ${jobName}",
-        to: "${mailRecipients}",
-        replyTo: "${mailRecipients}",
-        recipientProviders: [[$class: 'CulpritsRecipientProvider']]
-}
-     }        
+    stage('Email')
+        {
+            env.ForEmailPlugin = env.WORKSPACE      
+            emailext attachmentsPattern: 'TestResults\\*.trx',      
+            body: '''${SCRIPT, template="groovy_html.template"}''', 
+            subject: currentBuild.currentResult + " : " + env.JOB_NAME, 
+            to: 'devops81@gmail.com'
+        }
+           
                  /*  stage ('Send slack notification')
                             {
                                         steps 
