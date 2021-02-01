@@ -1,7 +1,7 @@
             pipeline {
                         environment {
                                     EMAIL_TO = 'devops81@gmail.com'
-                                    registry = "wbbdocker1/devops"
+                                    registry = "devops81/devops"
                                     registryCredential = 'dockerhub'
                                     dockerImage = ''
                                     }
@@ -45,7 +45,7 @@
                       stage ('Generate JUNIT REPORT') {
                          steps {
                               parallel ( 
-                                  'Archeiving the reports': 
+                                  'Archiving the reports': 
                         {
                             junit 'examples/feed-combiner-java8-webapp/target/surefire-reports/*.xml'
                             
@@ -84,7 +84,7 @@
                     stage ('Deploy the application') {
                         steps {
                            
-                            echo 'I can copy stuffs here'
+                            echo 'Deploy Steps'
                             
                         }
                     }
@@ -107,17 +107,17 @@
         failure {
             emailext body: 'Check console output at ${env.BUILD_URL} to view the results. \n\n ${env.CHANGES} \n\n -------------------------------------------------- \n${BUILD_LOG, maxLines=100, escapeHtml=false}', 
                     to: "${EMAIL_TO}", 
-                    subject: 'Build failed in Jenkins:  ${env.JOB_NAME} - ${env.BUILD_NUMBER}'
+                    subject: "Build failed in Jenkins:  ${env.JOB_NAME} - ${env.BUILD_NUMBER}"
         }
         unstable {
             emailext body: 'Check console output at ${env.BUILD_URL} to view the results. \n\n ${env.CHANGES} \n\n -------------------------------------------------- \n${BUILD_LOG, maxLines=100, escapeHtml=false}', 
                     to: "${EMAIL_TO}", 
-                    subject: 'Unstable build in Jenkins: ${env.JOB_NAME} - ${env.BUILD_NUMBER}'
+                    subject: "Unstable build in Jenkins: ${env.JOB_NAME} - ${env.BUILD_NUMBER}"
         }
         changed {
             emailext body: 'Check console output at ${env.BUILD_URL} to view the results.', 
                     to: "${EMAIL_TO}", 
-                    subject: 'Jenkins build is back to normal: ${env.JOB_NAME} - ${env.BUILD_NUMBER}'
+                    subject: "Jenkins build is back to normal: ${env.JOB_NAME} - ${env.BUILD_NUMBER}"
         }
     
 }
