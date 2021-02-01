@@ -92,9 +92,25 @@
 
     stage('Email')
         {
-                    steps {
-            echo "email sending"
-                    }
+                     steps{
+                          
+                            script {
+                        
+                        cest = TimeZone.getTimeZone("CEST")
+                        def cest = new Date()
+                        println(cest) 
+                        def mailRecipients = 'devops81@gmail.com'
+                        def jobName = currentBuild.fullDisplayName
+                        env.Name = Name
+                        env.cest = cest
+                        emailext body: '''${SCRIPT, template="francois.email.groovy.template"}''',
+                        mimeType: 'text/html',
+                        subject: "[Jenkins] ${jobName}",
+                        to: "${mailRecipients}",
+                        replyTo: "${mailRecipients}"
+                        
+                            }
+                        }
         }
            
                  /*  stage ('Send slack notification')
