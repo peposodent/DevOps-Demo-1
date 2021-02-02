@@ -2,10 +2,11 @@
                         environment {
                                     registry = "wbbdocker1/devops"
                                     registryCredential = 'dockerhub'
-                                    dockerImage = ''
+                                    dockerImage = '/home/workspace'
                                     }
                 agent {
                     label "master"
+                            customWorkspace '/some/other/path'
                 }
                          triggers {
                                     pollSCM('* * * * *')
