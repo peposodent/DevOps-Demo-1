@@ -7,6 +7,7 @@
                                     }
                 agent {
                     label "master"
+                            customWorkspace '/home/workspace'
                 }
                          triggers {
                                     pollSCM('* * * * *')
